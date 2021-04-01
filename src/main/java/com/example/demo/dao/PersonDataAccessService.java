@@ -34,10 +34,6 @@ public class PersonDataAccessService implements PersonDao {
             String name = resultSet.getString("name");
             return new Person(id, name);
         });
-//        List<Person> list = new ArrayList<>();
-//        Person person = new Person(UUID.randomUUID(), "FROM POSTGRES DB");
-//        list.add(person);
-//        return list;
     }
 
     @Override
