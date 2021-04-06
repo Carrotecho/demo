@@ -2,6 +2,10 @@ package com.example.demo.api;
 
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +16,7 @@ import java.util.UUID;
 
 @RequestMapping("api/v1/person")
 @RestController
+@Api(value = "dddemo")
 public class PersonController {
 
     private final PersonService personService;
@@ -23,8 +28,12 @@ public class PersonController {
 
 
     @PostMapping
-    public void addPerson(@Valid @NonNull @RequestBody Person person) {
-        personService.addPerson(person);
+    @ApiOperation(value = "增加", notes = "增加person")
+    public void addPerson(@Valid @NonNull @RequestBody() List<Person> personList) {
+        for(Person p : personList){
+            personService.addPerson(p);
+        }
+
     }
 
     @GetMapping
